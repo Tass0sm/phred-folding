@@ -1,0 +1,63 @@
+#+title: Phred Folding
+
+[[file:~/org/bibliography/nar00394-0137.pdf]]
+
+* Zucker Algorithm
+W(i, j) -- The minimum free energy of all possible structures of the subsequence S_{ij}
+
+V(i, j) -- The minimum free energy of all possible structures of the subsequence S_{ij} where S_i and S_j are paired with each other.
+
+FH(i, j) -- The hairpin loop containing the interior edge between Si and Sj.
+
+FL(i,j,i',j') -- The face containing exactly two interior edges, one between Si and Sj, and the other between Si', and Sj', (assuming i < i' < j' < j)
+
+
+Goal: W(0, len(S))
+
+Useful Rules:
+
+j - i = d
+
+#+begin_src python
+if d = 4:
+  if "Si Sj pair and form a loop":
+    V(i, j) = +8.4 if Si = G, Sj = C
+    V(i, j) = +8.0 if Si = A, Sj = U
+  else:
+    W(i, j) = 0
+    V(i, j) = inf
+
+elif d > 4:
+  # recursion step
+  if "Si Sj pair and form a loop":
+    V(i, j) = min {E1, E2, E3}
+  else:
+
+    V(i, j) = inf
+
+
+
+#+end_src
+
+For d > 4, V case:
+
+#+DOWNLOADED: screenshot @ 2022-09-06 22:35:14
+[[file:Zucker_Algorithm/2022-09-06_22-35-14_screenshot.png]]
+
+For d > 4, W case:
+
+#+DOWNLOADED: screenshot @ 2022-09-06 22:39:41
+[[file:Zucker_Algorithm/2022-09-06_22-39-41_screenshot.png]]
+
+a time to a sequence, and observing what the best structure is at each step.
+The last number to be computed, W(1,n), is the desired answer. It is the
+minimum energy of an admissible structure on S. However, the labour expended
+to compute W(1,n) has in fact produced much more, for the minimum energy of
+an admissible structure on every subsequence of S is also known. All that
+remains is the construction of the structure, which is equivalent to identi-
+fying the interior edges of the associated graph. This is achieved by a
+traceback through the matrices W and V and is straightforward.
+
+#+begin_src haskell
+
+#+end_src
