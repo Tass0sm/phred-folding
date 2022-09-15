@@ -3,14 +3,56 @@
 [[file:~/org/bibliography/nar00394-0137.pdf]]
 
 * Zucker Algorithm
+
+If F is a face, we let E(F) denote its associated free energy. For
+example, if F is a stacking region between two A-U pairs, E(F) = -1.8 kcal/
+mole (6). The energy of a structure is the sum of the energies of its
+faces, and the problem at hand is to find a structure with minimum free
+energy. The energy function is a powerful tool. Its proper use can rule out
+invalid or undesired structures. For example, if F is a hairpin loop with
+fewer than four exterior edges, set E(F)=o. This will exclude the selection
+of stearically impossible structures containing hairpin loops of fewer than
+three bases. Even the more involved rule allowing G-U base pairings only in
+the interior of a succession of stacking regions can be accomplished through
+correct use of the energy function. On the other hand, the energy function
+can be used to favour certain types of structures. This will be discussed
+later. We use the energies compiled by Salser (6). To date, this is the best
+information available on the stabilizing effect of stacking regions and the
+destabilizing 9ffects of various loops. There is still virtually no knowled-
+ge on the destabilizing effects of bifurcation loops. We treat them in two
+different ways. In one version of the algorithm, they all have zero energy,
+while in another, they are treated as interiqr loops. The latter algorithm
+is of course more complex. All the results shown in this paper are produced
+from a computer program using the second method.
+
+
+A face -- A face of a graph is defined to be any planar region bounded on all sides by
+edges.
+
+The free energy of a structure is associated not with the bonds, as is
+done in effect by Nussinov et al. (9), but with the regions between bonds. In
+terms of the graphical representation, the energy depends on the faces of the
+graph. A face with a single interior edge is called a hairpin loop.
+
+E(F) -- The free energy of a face.
+
 W(i, j) -- The minimum free energy of all possible structures of the subsequence S_{ij}
 
-V(i, j) -- The minimum free energy of all possible structures of the subsequence S_{ij} where S_i and S_j are paired with each other.
+V(i, j) -- The minimum free energy of all possible structures of the subsequence S_{ij} /where S_i and S_j are paired with each other/.
 
 FH(i, j) -- The hairpin loop containing the interior edge between Si and Sj.
 
+This is the FH(i, j) region:
+
+#+DOWNLOADED: screenshot @ 2022-09-14 12:24:04
+[[file:Zucker_Algorithm/2022-09-14_12-24-04_screenshot.png]]
+
 FL(i,j,i',j') -- The face containing exactly two interior edges, one between Si and Sj, and the other between Si', and Sj', (assuming i < i' < j' < j)
 
+All of these are FL faces:
+
+#+DOWNLOADED: screenshot @ 2022-09-14 12:21:41
+[[file:Zucker_Algorithm/2022-09-14_12-21-41_screenshot.png]]
 
 Goal: W(0, len(S))
 
